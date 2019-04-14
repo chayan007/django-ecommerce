@@ -61,3 +61,11 @@ class RegisterForm(forms.Form):
             }
         )
     )
+
+    def clean(self):
+        data = self.cleaned_data
+        password1 = self.cleaned_data.get('password')
+        password2 = self.cleaned_data.get('password_confirmation')
+        if password1 != password2:
+            raise forms.ValidationError('Passwords not matching !')
+        return data
