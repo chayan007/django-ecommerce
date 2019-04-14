@@ -47,7 +47,10 @@ def login_page(request):
 
 
 def register_page(request):
-    form = LoginForm(request.POST or None)
+    form = RegisterForm(request.POST or None)
+    context = {
+        'form': form
+    }
     if form.is_valid():
         print(form.cleaned_data)
-    return render(request, 'auth/register.html', {})
+    return render(request, 'auth/register.html', context)

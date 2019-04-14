@@ -53,3 +53,11 @@ class RegisterForm(forms.Form):
             }
         )
     )
+    password_confirmation = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "Enter the Password Again"
+            }
+        )
+    )
