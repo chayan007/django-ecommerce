@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from forms.contact_forms import ContactForm
 from forms.auth_forms import *
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 
 def home_page(request):
@@ -52,5 +53,9 @@ def register_page(request):
         'form': form
     }
     if form.is_valid():
-        print(form.cleaned_data)
+        username = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        User.objects.create(username=username, email=email, password=password)
+        return redirect('/')
     return render(request, 'auth/register.html', context)
